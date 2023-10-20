@@ -21,6 +21,7 @@ export class BookSearchComponent implements OnInit {
   searchForm = this.fb.group({
     term: ''
   });
+  lastChangesSearchTime;
 
   constructor(
     private readonly store: Store,
@@ -35,6 +36,14 @@ export class BookSearchComponent implements OnInit {
     this.store.select(getAllBooks).subscribe(books => {
       this.books = books;
     });
+    this.searchForm.controls.term.valueChanges.subscribe(res => {
+      if(!this.lastChangesSearchTime) {
+        this.lastChangesSearchTime = new Date();
+        this.searchBooks(); 
+      } else if(new Date().getTime() - this.lastChangesSearchTime.getTime() > 500){
+        this.searchBooks();
+      }
+  });
   }
 
   formatDate(date: void | string) {
