@@ -28,4 +28,21 @@ export class ReadingListService {
       return list.filter(x => x.bookId !== id);
     });
   }
+
+  async markAsFinished(id: string): Promise<void> {
+    this.storage.update(list => {
+      const i = list.findIndex(each => each.bookId === id.toString());
+      if(i > -1){
+        list[i] = {
+          ... list[i],
+          finished : true,
+          finishedDate : new Date().toISOString()
+        }
+        return list;
+      } else {
+        throw new Error("Item to be updated not found!!");
+      }
+      
+    });
+  }
 }

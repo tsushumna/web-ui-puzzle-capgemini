@@ -9,6 +9,13 @@
         {{ b.authors.join(',') }}
       </div>
     </div>
+    <div *ngIf="!b.finished" (click)="onMarkAsFinished(b)" class="cursor-pointer reading-list-item--details--finished">
+      <b>Mark as finished</b>
+    </div>
+    <div *ngIf="b.finished"  class="reading-list-item--details--finished">
+      <b>Finished</b>
+     {{returnDate(b.finishedDate)| date :'shortDate' }}
+    </div>
     <div>
       <button
         mat-icon-button
