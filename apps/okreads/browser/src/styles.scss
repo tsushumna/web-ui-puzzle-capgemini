@@ -2,3 +2,13 @@
 @import '~normalize.css';
 @import '~@angular/material/prebuilt-themes/indigo-pink.css';
 @import 'base.scss';
+
+.width-100{
+    width :100%;
+}
+.cursor-pointer { 
+    cursor : pointer;
+}
+.align-items-center {
+    align-items:center;
+}
